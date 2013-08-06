@@ -1,0 +1,34 @@
+{#
+  brand : {
+    title: <>, url: <>
+  },
+  links: [
+    {title: <>, url:<>, active: True|False}
+  ]
+#}
+
+{% macro render_navbar(brand=None, links=None) %}
+  {% if brand %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        {% if links %}
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            {% for link in links %}
+              <span class="icon-bar"></span>
+            {% endfor %}
+          </button>
+        {% endif %}
+        <a class="brand" href="{{brand.url}}">{{brand.title}}</a>
+        {% if links %}
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              {% for link in links %}
+                <li {{ 'class="active"' if link.active }}><a href="{{link.url}}">{{link.title}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}

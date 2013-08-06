@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from 'errors-macro.html' import render_errors %}
+{% from 'breadcrumbs-macro.html' import render_breadcrumbs %}
+{% from 'nav-macro.html' import render_navbar %}
+
+{% block navbar %}
+  {{ render_navbar (brand=rrequest.params.brand, links=rrequest.params.nav_links) }}
+{% endblock %}
+
+{% block main %}
+  <h2>Errors</h2>
+  <div class="row-fluid">
+    <div class="span8">
+      {{ render_errors(errors=rrequest.errors) }}
+    </div>
+  </div>
+{% endblock %}

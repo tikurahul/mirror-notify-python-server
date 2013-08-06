@@ -1,0 +1,20 @@
+{% macro render_breadcrumbs(crumbs=None) %}
+
+{% if crumbs %}
+  <div class="row-fluid">
+    <div class="span10">
+      <ul class="breadcrumb">
+        {# crumb has 2 properties: title, url #}
+        {% for crumb in crumbs %}
+        {% if not loop.last %}
+          <li><a href="{{crumb.url}}">{{crumb.title}}</a> <span class="divider">/</span></li>
+        {% else %}
+          <li class="active"><a href="{{crumb.url}}">{{crumb.title}}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
+
+{% endmacro %}

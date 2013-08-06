@@ -1,0 +1,12 @@
+{# messages is a list of string #}
+{% macro render_messages(messages=None) %}
+	{% if errors %}
+		<div class="alert alert-info">
+			<ol>
+				{% for message in messages %}
+					<li>{{ message }}</li>
+				{% endfor %}
+			</ol>
+		</div>
+	{% endif %}
+{% endmacro %}

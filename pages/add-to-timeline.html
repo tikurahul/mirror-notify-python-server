@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% from 'breadcrumbs-macro.html' import render_breadcrumbs %}
+{% from 'errors-macro.html' import render_errors %}
+{% from 'nav-macro.html' import render_navbar %}
+
+{% block navbar %}
+  {{ render_navbar (brand=rrequest.params.brand, links=rrequest.params.nav_links) }}
+{% endblock %}
+
+{% block main %}
+  {{ render_breadcrumbs(crumbs=rrequest.params.breadcrumbs) }}
+
+  <h3>Add a timeline item</h3>
+  <br/>
+
+  {{ render_errors(errors=rrequest.errors) }}
+
+  {% if rrequest.params.success %}
+    <div class="row-fluid">
+      <div class="span10 alert alert-success">
+        <h4>Success</h4>
+        <p>Successfully added a timeline item.</p>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="row-fluid">
+    <div class="span10">
+      <form class="form-horizontal" action="/addToTimeLine" method="post">
+        <div class="control-group">
+          <label class="control-label" for="user_email">Email</label>
+          <div class="controls">
+            <input type="text" id="user_email" name="user_email" placeholder="Email" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="image_url">Image URI</label>
+          <div class="controls">
+            <input class="input-xlarge" type="text" id="image_url" name="image_url" placeholder="Optional Image URI" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="message">Message</label>
+          <div class="controls">
+            <textarea class="input-xxlarge" id="message" name="message" rows="10" placeholder="Message"></textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="is_html">HTML Message ?</label>
+          <div class="controls">
+            <select id="is_html" name="is_html">
+                <option value="True">True</option>
+                <option value="False">False</option>
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="f">Format</label>
+          <div class="controls">
+            <select id="f" name="f">
+                <option value="html">HTML</option>
+                <option value="pjson">JSON</option>
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="callback">Callback</label>
+          <div class="controls">
+            <input type="text" id="callback" name="callback" placeholder="Optional Callback" />
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <button type="submit" class="btn btn-primary">Add Timeline Item</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
